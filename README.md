@@ -28,7 +28,7 @@ module "mqtt" {
 | user | the user to setup in MQTT | string | - | yes |
 | password | the password to setup in MQTT | string | - | yes |
 | digitalocean_droplet_name | the name for the droplet | string | mosquitto | no |
-| digitalocean_droplet_region | the region for the droplet | string | lon | no |
+| digitalocean_droplet_region | the region for the droplet | string | lon1 | no |
 | digitalocean_droplet_image | the image for the droplet | string | ubuntu-18-04-x64 | no |
 | digitalocean_droplet_size | the size of the droplet | string | s-1vcpu-1gb | no |
 
