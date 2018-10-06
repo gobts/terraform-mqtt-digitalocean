@@ -18,6 +18,26 @@ variable "password" {
   description = "the mqtt password for the user to set up in MQTT"
 }
 
+variable "digitalocean_droplet_name" {
+  description = "the name for the droplet in"
+  default = "mosquitto"
+}
+
+variable "digitalocean_droplet_region" {
+  description = "the region to run the droplet in"
+  default = "lon"
+}
+
+variable "digitalocean_droplet_image" {
+  description = "the ubuntu image to use for the droplet"
+  default = "ubuntu-18-04-x64"
+}
+
+variable "digitalocean_droplet_size" {
+  description = "the size to use for the droplet"
+  default = "s-1vcpu-1gb"
+}
+
 provider "digitalocean" {
 }
 
@@ -37,10 +57,10 @@ data "template_file" "user_data" {
 }
 
 resource "digitalocean_droplet" "mosquitto" {
-  image  = "ubuntu-18-04-x64"
-  name   = "mosquitto"
-  region = "lon1"
-  size   = "s-1vcpu-1gb"
+  name   = "${var.digitalocean_droplet_name}"
+  image  = "${var.digitalocean_droplet_image}"
+  size   = "${var.digitalocean_droplet_size}"
+  region = "${var.digitalocean_droplet_region}"
   ssh_keys = ["${data.digitalocean_ssh_key.default.id}"]
 	user_data = "${data.template_file.user_data.rendered}"
 }
