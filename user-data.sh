@@ -14,16 +14,6 @@ sudo ufw allow 80
 sudo ufw allow 8883
 sudo ufw allow 8083
 
-sudo certbot certonly \
-  --standalone \
-  --non-interactive \
-  --agree-tos \
-  --preferred-challenges http \
-  --email ${email} \
-  --domains ${domain} \
-  --pre-hook 'sudo systemctl stop mosquitto' \
-  --post-hook 'sudo systemctl start mosquitto'
-
 sudo touch /etc/mosquitto/passwd
 sudo mosquitto_passwd -b /etc/mosquitto/passwd ${user} ${password}
 
@@ -39,5 +29,14 @@ sudo echo 'certfile /etc/letsencrypt/live/${domain}/cert.pem' >> /etc/mosquitto/
 sudo echo 'cafile /etc/letsencrypt/live/${domain}/chain.pem' >> /etc/mosquitto/conf.d/default.conf
 sudo echo 'keyfile /etc/letsencrypt/live/${domain}/privkey.pem' >> /etc/mosquitto/conf.d/default.conf
 
-sudo systemctl restart mosquitto
-sudo systemctl status mosquitto
+sleep 20s 
+
+sudo certbot certonly \
+  --standalone \
+  --non-interactive \
+  --agree-tos \
+  --preferred-challenges http \
+  --email ${email} \
+  --domains ${domain} \
+  --pre-hook 'sudo systemctl stop mosquitto' \
+  --post-hook 'sudo systemctl start mosquitto'
