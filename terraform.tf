@@ -8,7 +8,7 @@ data "digitalocean_ssh_key" "default" {
 data "template_file" "user_data" {
   template = "${file("${path.module}/user-data.sh")}"
 
-  vars {
+  vars = {
 		domain = "${var.domain_name}"
 		user = "${var.user}"
 		email = "${var.email}"
