@@ -1,14 +1,14 @@
-terraform {
-  required_providers {
-    digitalocean = {
-      source = "digitalocean/digitalocean"
-      version = "2.30.0"
-    }
-  }
-}
+# terraform {
+#   required_providers {
+#     digitalocean = {
+#       source = "digitalocean/digitalocean"
+#       version = "2.30.0"
+#     }
+#   }
+# }
 
-provider "digitalocean" {
-}
+# provider "digitalocean" {
+# }
 
 data "digitalocean_ssh_key" "default" {
   name = "${var.ssh_key_name}"
